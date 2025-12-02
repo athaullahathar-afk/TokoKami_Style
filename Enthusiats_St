@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Website Produk Fashion</title>
+    <!-- Font Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <!-- Font Awesome untuk ikon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: #333;
+        }
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem 1rem;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+            font-weight: 600;
+        }
+        header p {
+            margin: 0.5rem 0 0;
+            font-weight: 300;
+        }
+        nav {
+            display: flex;
+            justify-content: center;
+            background: rgba(255,255,255,0.9);
+            padding: 1rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        nav a {
+            color: #667eea;
+            margin: 0 1.5rem;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        nav a:hover {
+            color: #764ba2;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+        .filter-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+        .filter-buttons button {
+            padding: 0.75rem 1.5rem;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .filter-buttons button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(245,87,108,0.3);
+        }
+        .filter-buttons button.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            box-shadow: 0 4px 12px rgba(102,126,234,0.3);
+        }
+        .products {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+        .product {
+            background: white;
+            border-radius: 15px;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            overflow: hidden;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        .product:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
+        .product img {
+            max-width: 100%;
+            height: 220px;
+            object-fit: cover;
+            border-radius: 10px;
+            transition: transform 0.3s;
+        }
+        .product:hover img {
+            transform: scale(1.05);
+        }
+        .product h3 {
+            margin: 1rem 0 0.5rem;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+        .product p {
+            color: #666;
+            margin: 0.5rem 0;
+        }
+        .original-price {
+            text-decoration: line-through;
+            color: #999;
+            font-size: 0.9rem;
+        }
+        .discounted-price {
+            color: #e74c3c;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+        .product button {
+            margin-top: 1rem;
+            padding: 0.75rem 1.5rem;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: transform 0.3s;
+        }
+        .product button:hover {
+            transform: translateY(-2px);
+        }
+        .return-section {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-top: 3rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        .return-section h2 {
+            text-align: center;
+            color: #667eea;
+            margin-bottom: 1rem;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        label {
+            margin-top: 1rem;
+            font-weight: 500;
+        }
+        input, textarea, select {
+            padding: 0.75rem;
+            margin-top: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            font-family: 'Poppins', sans-serif;
+        }
+        button[type="submit"] {
+            margin-top: 1.5rem;
+            padding: 0.75rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: transform 0.3s;
+        }
+        button[type="submit"]:hover {
+            transform: translateY(-2px);
+        }
+        /* Customer Service Section */
+        .customer-service {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-top: 3rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        .customer-service h2 {
+            text-align: center;
+            color: #667eea;
+            margin-bottom: 1rem;
+        }
+        .tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+        .tab-button {
+            padding: 0.75rem 1.5rem;
+            background: #f0f0f0;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 500;
+            margin: 0 0.5rem;
+            transition: background 0.3s;
+        }
+        .tab-button.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        .tab-content {
+            display: none;
+            padding: 1rem;
+            background: #f9f9f9;
+            border-radius: 10px;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        .tab-content h3 {
+            color: #667eea;
+            margin-bottom: 1rem;
+        }
+        .tab-content ul {
+            list-style: none;
+            padding: 0;
+        }
+        .tab-content li {
+            margin-bottom: 0.5rem;
+        }
+        footer {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+            padding: 1.5rem;
+            margin-top: 3rem;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        /* Responsivitas */
+        @media (max-width: 768px) {
+            .products {
+                grid-template-columns: 1fr;
+            }
+            nav {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            .tabs {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1><i class="fas fa-tshirt"></i> Toko Fashion Kami</h1>
+        <p>Produk fashion terbaik untuk Anda – Trendy dan Berkualitas</p>
+    </header>
+    <nav>
+        <a href="#home"><i class="fas fa-home"></i> Beranda</a>
+        <a href="#products"><i class="fas fa-shopping-bag"></i> Produk</a>
+        <a href="#return"><i class="fas fa-undo"></i> Retur</a>
+        <a href="#customer-service"><i class="fas fa-headset"></i> Customer Service</a>
+        <a href="#contact"><i class="fas fa-envelope"></i> Kontak</a>
+    </nav>
+    <div class="container">
+        <h2 id="products"><i class="fas fa-star"></i> Produk Fashion</h2>
+        <!-- Tombol Filter -->
+        <div class="filter-buttons">
+            <button class="filter-btn active" data-category="all"><i class="fas fa-th"></i> Semua</button>
+            <button class="filter-btn" data-category="Men"><i class="fas fa-male"></i> Men</button>
+            <button class="filter-btn" data-category="Women"><i class="fas fa-female"></i> Women</button>
+            <button class="filter-btn" data-category="Sport"><i class="fas fa-running"></i> Sport</button>
+        </div>
+        <div class="products" id="product-list"></div>
+        
+        <!-- Section Retur Barang -->
+        <div class="return-section" id="return">
+            <h2><i class="fas fa-exchange-alt"></i> Form Retur Barang</h2>
+            <p>Jika Anda ingin mengembalikan barang, isi form di bawah ini. Kami akan memproses dalam 3-5 hari kerja.</p>
+            <form id="return-form">
+                <label for="name"><i class="fas fa-user"></i> Nama Lengkap:</label>
+                <input type="text" id="name" name="name" required>
+                
+                <label for="email"><i class="fas fa-envelope"></i> Email:</label>
+                <input type="email" id="email" name="email" required>
+                
+                <label for="order-id"><i class="fas fa-hashtag"></i> ID Pesanan:</label>
+                <input type="text" id="order-id" name="order-id" required>
+                
+                <label for="product"><i class="fas fa-box"></i> Produk yang Diretur:</label>
+                <select id="product" name="product" required>
+                    <option value="">Pilih Produk</option>
+                    <option value="Kaos Polos">Kaos Polos</option>
+                    <option value="Celana Jeans">Celana Jeans</option>
+                    <option value="Dress Wanita">Dress Wanita</option>
+                    <option value="Sepatu Sneakers">Sepatu Sneakers</option>
+                    <option value="Tas Kulit">Tas Kulit</option>
+                    <option value="Topi Baseball">Topi Baseball</option>
+                    <option value="Jaket Kulit">Jaket Kulit</option>
+                    <option value="Blouse Wanita">Blouse Wanita</option>
+                    <option value="Sepatu Lari">Sepatu Lari</option>
+                </select>
+                
+                <label for="reason"><i class="fas fa-comment"></i> Alasan Retur:</label>
+                <textarea id="reason" name="reason" rows="4" required></textarea>
+                
+                <button type="submit"><i class="fas fa-paper-plane"></i> Kirim Permintaan Retur</button>
+            </form>
+        </div>
+        
+        <!-- Section Customer Service -->
+        <div class="customer-service" id="customer-service">
+            <h2><i class="fas fa-headset"></i> Customer Service</h2>
+            <p>Kami siap membantu Anda! Pilih kategori di bawah untuk informasi lebih lanjut.</p>
+            <div class="tabs">
+                <button class="tab-button active" data-tab="faq"><i class="fas fa-question-circle"></i> FAQ</button>
+                <button class="tab-button" data-tab="return-exchange"><i class="fas fa-exchange-alt"></i> Return & Exchange</button>
+                <button class="tab-button" data-tab="reward-point"><i class="fas fa-star"></i> Reward Point</button>
+                <button class="tab-button" data-tab="size-guide"><i class="fas fa-ruler"></i> Size Guide</button>
+            </div>
+            <div id="faq" class="tab-content active">
+                <h3>Pertanyaan Umum (FAQ)</h3>
+                <ul>
+                    <li><strong>Bagaimana cara memesan?</strong> Kunjungi halaman produk, pilih item, dan klik "Beli Sekarang". Ikuti instruksi checkout.</li>
+                    <li><strong>Berapa lama pengiriman?</strong> Pengiriman biasanya 3-7 hari kerja tergantung lokasi.</li>
+                    <li><strong>Apakah ada biaya pengiriman?</strong> Gratis untuk pesanan di atas Rp 200.000, lainnya Rp 20.000.</li>
+                </ul>
+            </div>
+            <div id="return-exchange" class="tab-content">
+                <h3>Return & Exchange</h3>
+                <ul>
+                    <li><strong>Kebijakan Retur:</strong> Barang dapat dikembalikan dalam 14 hari setelah penerimaan, dalam kondisi asli.</li>
+                    <li><strong>Cara Tukar:</strong> Hubungi customer service kami atau gunakan form retur di atas.</li>
+                    <li><strong>Biaya:</strong> Retur gratis untuk cacat produk, biaya pengiriman untuk alasan lain.</li>
+                </ul>
+            </div>
+            <div id="reward-point" class="tab-content">
+                <h3>Reward Point</h3>
+                <ul>
+                    <li><strong>Cara Mendapatkan:</strong> Dapatkan 1 poin per Rp 10.000 pembelian.</li>
+                    <li><strong>Tukar Poin:</strong> 100 poin = diskon Rp 10.000. Lihat akun Anda untuk detail.</li>
+                    <li><strong>Kadaluarsa:</strong> Poin berlaku selama 1 tahun sejak tanggal penerimaan.</li>
+                </ul>
+            </div>
+            <div id="size-guide" class="tab-content">
+                <h3>Size Guide</h3>
+                <ul>
+                    <li><strong>Kaos:</strong> S (Panjang 65cm), M (67cm), L (69cm), XL (71cm).</li>
+                    <li><strong>Celana:</strong> 28 (Lingkar Pinggang 76cm), 30 (81cm), 32 (86cm), 34 (91cm).</li>
+                    <li><strong>Dress:</strong> XS (Bust 82cm), S (87cm), M (92cm), L (97cm).</li>
+                    <li><strong>Tips:</strong> Ukur tubuh Anda dan bandingkan dengan panduan ini untuk ukuran yang pas.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <p>&copy; 2023 Toko Fashion Kami. Semua hak dilindungi. <i class="fas fa-heart"></i></p>
+    </footer>
+
+    <script>
+        // Data produk dengan kategori
+        const products = [
+            { name: "Kaos Polos", category: "Men", originalPrice: "Rp 75.000", discountedPrice: "Rp 50.000", image: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=250&h=200&fit=crop" },
+            { name: "Celana Jeans", category: "Men", originalPrice: "Rp 200.000", discountedPrice: "Rp 150.000", image: "https://images.unsplash.com/photo-1542272604-787c3835535d?w=250&h=200&fit=crop" },
+            { name: "Dress Wanita", category: "Women", originalPrice: "Rp 300.000", discountedPrice: "Rp 200.000", image: "https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=250&h=200&fit=crop" },
+            { name: "Sepatu Sneakers", category: "Sport", originalPrice: "Rp 400.000", discountedPrice: "Rp 300.000", image: "https://images.unsplash.com/photo-1549298916-b41d501d3772?w=250&h=200&fit=crop" },
+            { name: "Tas Kulit", category: "Women", originalPrice: "Rp 350.
